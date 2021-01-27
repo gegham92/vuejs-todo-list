@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+
+<div class="container">
+    <div id="todo" style="width: 200px">
+        <p>Список задач</p>
+        <form>
+            <div class="form-group">
+                <input
+                        type="text"
+                        class="form-control"
+                        v-bind:placeholder="inputPlaceholder"
+                        v-bind:value="inputValue"
+                        v-on:input="InputValueChanged"
+                />
+            </div>
+            <div class="form-group">
+                <textarea
+                        class="form-control"
+                        v-bind:placeholder="textareaPlaceholder"
+                        v-bind:value="textareaValue"
+                        v-on:input="TextareaValueChanged"
+                ></textarea>
+            </div>
+        </form>
+        <br />
+        <br />
+        <button class="btn btn-default" v-on:click="ButtonCLicked">Add Task</button>
+
+        <br />
+        <br />
+        <br />
+        <br />
+
+        <ul class="list">
+            <li v-for="note in notes">
+                <p>Title: {{ note.title }}</p>
+                <p>Description: {{ note.text }}</p>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    const Counter = {
+        data() {
+            return {
+                inputPlaceholder: 'Task title',
+                textareaPlaceholder: 'Task description',
+                inputValue: '',
+                textareaValue: '',
+                notes: []
+            }
+        },
+        methods: {
+            InputValueChanged: function (event) {
+                console.log(event.target.value);
+                this.inputValue = event.target.value;
+            },
+            TextareaValueChanged: function (event) {
+                console.log(event.target.value);
+                this.textareaValue = event.target.value;
+            },
+            ButtonCLicked: function () {
+                if (this.inputValue === '' || this.textareaValue === '') {
+                    alert('Please fill the fields!');
+                    return true;
+                }
+
+                this.notes.push({
+                    title: this.inputValue,
+                    text: this.textareaValue
+                });
+
+                this.RemoveValueFromInput();
+                console.log(this.notes);
+            },
+            RemoveValueFromInput: function () {
+                this.inputValue = '';
+                this.textareaValue = '';
+            }
+        }
+    }
+
+    Vue.createApp(Counter).mount('#todo')
+
+</script>
+
+
+</body>
+</html>
