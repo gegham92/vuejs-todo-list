@@ -19,23 +19,23 @@
                 <input
                         type="text"
                         class="form-control"
-                        v-bind:placeholder="inputPlaceholder"
-                        v-bind:value="inputValue"
-                        v-on:input="InputValueChanged"
+                        :placeholder="inputPlaceholder"
+                        :value="inputValue"
+                        @input="InputValueChanged"
                 />
             </div>
             <div class="form-group">
                 <textarea
                         class="form-control"
-                        v-bind:placeholder="textareaPlaceholder"
-                        v-bind:value="textareaValue"
-                        v-on:input="TextareaValueChanged"
+                        :placeholder="textareaPlaceholder"
+                        :value="textareaValue"
+                        @input="TextareaValueChanged"
                 ></textarea>
             </div>
         </form>
         <br />
         <br />
-        <button class="btn btn-default" v-on:click="AddTask">Add Task</button>
+        <button class="btn btn-default" @click="AddTask">Add Task</button>
 
         <br />
         <br />
@@ -48,7 +48,7 @@
                 <p>Description: {{ note.text }}</p>
                 <button
                         class="btn btn-default"
-                        v-on:click="RemoveTask(index)"
+                        @click="RemoveTask(index)"
                 >Remove Task</button>
             </li>
         </ul>
