@@ -42,9 +42,9 @@
         <br />
         <br />
 
-        <ul class="list">
+        <ul class="list" v-if="notes.length !== 0">
             <li v-for="(note, index) in notes">
-                <p>Title: {{ note.title }}</p>
+                <p>Title: {{ ToUpperCase(note.title) }}</p>
                 <p>Description: {{ note.text }}</p>
                 <button
                         class="btn btn-default"
@@ -52,6 +52,7 @@
                 >Remove Task</button>
             </li>
         </ul>
+        <div v-else>Задач пока нет!</div>
     </div>
 </div>
 
@@ -96,6 +97,9 @@
                 this.notes.splice(index, 1);
                 console.log('Removed task from list!');
                 console.log(this.notes);
+            },
+            ToUpperCase: function (item) {
+                return item.toUpperCase();
             }
         }
     }
