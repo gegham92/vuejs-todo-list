@@ -13,7 +13,7 @@
 
 <div class="container">
     <div id="todo" style="width: 200px">
-        <p :style="{color: inputValue.length < 10 ? 'blue' : 'red'}">Список задач</p>
+        <p v-text="taskList" :style="{color: inputValue.length < 10 ? 'blue' : 'red'}"></p>
         <form>
             <div class="form-group">
                 <input
@@ -39,26 +39,36 @@
         <br />
         <br />
         <br />
-
-        <ul class="list" v-if="notes.length !== 0">
-            <li v-for="(note, index) in notes">
-                <p>Title: {{ ToUpperCase(note.title) }}</p>
-                <p>Description: {{ note.text }}</p>
-                <button
-                        class="btn btn-default"
-                        @click="RemoveTask(index)"
-                >Remove Task</button>
-            </li>
-        </ul>
-        <div v-else>Задач пока нет!</div>
-        <p>2 x количество задач: {{ doubleCountComputed }}</p>
+        <div :class="notes.length < 2 ? 'text-primary' : 'text-success'">
+            <ul class="list" v-if="notes.length !== 0">
+                <li v-for="(note, index) in notes">
+                    <p>Title: {{ ToUpperCase(note.title) }}</p>
+                    <p>Description: {{ note.text }}</p>
+                    <button
+                            class="btn btn-default"
+                            @click="RemoveTask(index)"
+                    >Remove Task</button>
+                </li>
+            </ul>
+            <div v-else>Задач пока нет!</div>
+        </div>
+        <p :class="{
+            'bold': true,
+            'text-primary': notes.length >= 2
+        }">2 x количество задач: {{ doubleCountComputed }}</p>
     </div>
 </div>
 
 <script>
     const ToDo = {
+        /*
+        data: () => ({
+            or we can use this
+        })
+        * */
         data() {
             return {
+                taskList: 'Список задач',
                 inputPlaceholder: 'Task title',
                 textareaPlaceholder: 'Task description',
                 inputValue: '',
