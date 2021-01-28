@@ -50,7 +50,7 @@
                     >Remove Task</button>
                 </li>
             </ul>
-            <div v-else>Задач пока нет!</div>
+            <div v-html="noTaskYet" v-else></div>
         </div>
         <p :class="{
             'bold': true,
@@ -73,7 +73,8 @@
                 textareaPlaceholder: 'Task description',
                 inputValue: '',
                 textareaValue: '',
-                notes: []
+                notes: [],
+                noTaskYet: '<span>Задач пока нет!</span>'
             }
         },
         methods: {
