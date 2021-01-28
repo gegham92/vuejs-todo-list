@@ -53,6 +53,7 @@
             </li>
         </ul>
         <div v-else>Задач пока нет!</div>
+        <p>2 x количество задач: {{ doubleCountComputed }}</p>
     </div>
 </div>
 
@@ -100,6 +101,12 @@
             },
             ToUpperCase: function (item) {
                 return item.toUpperCase();
+            }
+        },
+        // This is called when array notes is changed
+        computed: {
+            doubleCountComputed: function () {
+                return this.notes.length * 2;
             }
         }
     }
