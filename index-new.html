@@ -108,6 +108,11 @@
             doubleCountComputed: function () {
                 return this.notes.length * 2;
             }
+        },
+        watch: {
+            inputValue(value) {
+                console.log('inputValue has been changed: ', value);
+            }
         }
     }
 
